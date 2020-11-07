@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DOM</title>
+    <style>
+        .miClase {
+          color:red;
+        }
+    </style>
+    <script type="text/javascript">
+      window.addEventListener("load",inicio);
+      function inicio(){
+        document.getElementById("cambiarTextos").addEventListener("click",cambiarTextos);
+        document.getElementById("cambiarClases").addEventListener("click",cambiarClases);
+        document.getElementById("quitarClases").addEventListener("click",quitarClases);
+
+      }
+
+      function cambiarTextos(){
+        // Seleccionar UN UNICO elemento segun el //ID
+        document.getElementById("parrafo1").innerHTML = "Primer parrafo cambiado";
+        // Seleccionar TODOS los elementos segun su etiqueta
+        document.getElementsByTagName("p")[1].innerHTML = "Segundo parrafo cambiado";
+
+        //Seleccionar todos los elementos segun su clase
+        document.getElementsByClasssName("miClase")[0].innerHTML = "Tercer parrafo cambiado";
+
+        //Seleccionar un elemento dentro de otro
+        var principal = document.getElementById("main");
+        var parrafo1 = principal.getElementById("parrafo1");
+
+        // Seleccionar el primer elemento con un selector css
+        /*document.querySelector("p.miClase");
+        document.querySelector("p.miClase")[0];
+        */
+        }
+
+        function cambiarClases(){
+          document.getElementById("parrafo1").setAttribute("class","miClase");
+          document.getElementById("parrafo2").className = "miClase";
+          document.getElementById("parrafo3").className = "miClase";
+        }
+
+        function quitarClases(){
+          document.getElementById("parrafo1").setAttribute("class","");
+          document.getElementById("parrafo2").className = "";
+          document.getElementById("parrafo3"). className = "";
+
+          for (var i = 0; i<document.getElementsByTagName("p").length; i++){
+            document.getElementsByTagName("p")[i].className = "";
+          }
+        }
+
+
+
+
+    </script>
+
+  </head>
+  <body>
+    <div id="main">
+      <p id="parrafo1">Este es el primer parrafo</p>
+      <p id="parrafo2">Este es el segundo parrafo</p>
+      <p id="parrafo3" class="miClase">Este es el tercer parrafo</p>
+    </div>
+    <br/>
+    <button type="button" id="cambiarTextos">Cambiar texto de parrafos</button>
+    <button type="button" id="cambiarClases">Cambiar clases de parrafos</button>
+    <button type="button" id="quitarClases" >Cambiar clases de todos los parrafos</button>
+
+  </body>
+</html>

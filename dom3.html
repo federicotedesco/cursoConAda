@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Document Object Model</title>
+
+    <script type="text/javascript">
+      window.addEventListener("load",inicio);
+      function inicio(){
+        for(var i = 0; i<document.getElementsByTagName("h2").length; i++){
+          document.getElementsByTagName("h2")[i].addEventListener("click",recorrerAdelente);
+        }
+      }
+
+      function recorrerAdelente(e){
+        var texto = "";
+        var h2 = e.target;
+        texto += "has elegido"+h2.textContent;
+
+        // Seleccionar el padre del <h2></h2>
+        var padre = h2.parentElement;
+        texto += "que esta situada en "+padre.id + "<br/>";
+
+        // Seleccionar el hermano
+        var ul = h2.nextElementSibling;
+
+        // Mostrar el nuimero de hijos
+        //OJO .childNodes incluye texto y comentarios.
+        texto += "El numero de provincias es"+ ul.children.length;
+
+        var hijo = ul.firstChild;
+        while (hijo != null){
+          texto += " "+hijo.textContent;
+          hijo = hijo.nextElementSibling;
+        }
+
+        // Mostramos el texto
+        document.getElementById("texto").innerHTML = texto;
+        // si ponemos .textContent mostramos el texto pleno y no agarrra etiquetas HTML
+      }
+    </script>
+
+  </head>
+  <body>
+    <div id="norte">
+      <h2>Galicia</h2>
+      <ul id="lista">
+        <li>A Curunia</li>
+        <li>Lugo</li>
+        <li>Ourense</li>
+        <li>Pontevedra</li>
+      </ul>
+    </div>
+    <div id="sur">
+      <h2>Canarias</h2>
+      <ul id="lista">
+        <li>Las palmas</li>
+        <li>Santa cruz de Tenerife</li>
+      </ul>
+    </div>
+    <div id="texto"></div>
+  </body>
+</html>

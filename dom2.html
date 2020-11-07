@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>DOM 2</title>
+
+    <style media="screen">
+
+        .miClase{
+          color : red;
+        }
+    </style>
+
+    <script type="text/javascript">
+      window.addEventListener("load", inicio);
+      function inicio(){
+        document.getElementById("crearParrafo").addEventListener("click",crearParrafo);
+        document.getElementById("crearImagen").addEventListener("click",crearImagen);
+        document.getElementById("borrarUltimo").addEventListener("click",borrarUltimo);
+        document.getElementById("borrarPrimero").addEventListener("click",borrarPrimero);
+        document.getElementById("susttituirPrimeroVacio").addEventListener("click",susttituirPrimeroVacio);
+      }
+
+      function crearParrafo(){
+        //Crear elementos
+        var parrafo = document.createElement("p");
+
+        //Crear texto
+        var texto = document.createTextNode(document.getElementById("texto").value);
+        parrafo.appendChild(texto);
+
+        //Aniadir atributos
+        parrafo.setAttribute("class","miClase");
+        //parrafo.className = "miClase";
+
+        var contenedor = document.getElementById("div1");
+        contenedor.appendChild(parrafo);
+
+      }
+
+      function crearImagen(){
+        //Crear elementos
+        var imagen = document.createElement("img");
+
+        //Aniadir atributos
+        imagen.setAttribute("src","https://images-na.ssl-images-amazon.com/images/I/91kny7EUh5L._SL1425_.jpg");
+        imagen.setAttribute("alt",prompt("Introduce un texto alternativo"));
+
+        var contenedor = document.getElementById("div1");
+        contenedor.appendChild(imagen);
+      }
+
+      function borrarUltimo(){
+        var contenedor = document.getElementById("div1");
+        var hijo = contenedor.lastChild; // selecciona el ultimo hijo
+
+        // Eliminar el nodo
+        contenedor.removeChild(hijo);
+      }
+
+      function borrarPrimero(){
+        var contenedor = document.getElementById("div1");
+        var hijo = contenedor.firstChild; // selecciona el ultimo hijo
+
+        // Eliminar el nodo
+        contenedor.removeChild(hijo);
+      }
+
+      function susttituirPrimeroVacio(){
+        var contenedor = document.getElementById("div1");
+        var parrafo = document.createElement("p");
+        var texto = document.createTextNode("Vacio");
+        parrafo.appendChild(texto);
+
+        // Susttituir
+        contenedor.replaceChild(parrafo, contenedor.firstChild); // nuevo , viejo
+
+      }
+
+
+    </script>
+
+
+  </head>
+  <body>
+
+    <div id="div1"></div>
+    <br/>
+    <textarea name="name" id="texto" rows="8" cols="80"></textarea>
+    <br/>
+    <button type="button" id="crearParrafo" name="button">Crear Parrafo</button>
+    <button type="button" id="crearImagen" name="button">Crar imagen</button>
+    <button type="button" id="borrarUltimo" name="button">Borrar ultimo</button>
+    <button type="button" id="borrarPrimero" name="button">Borrar Primero</button>
+    <button type="button" id="susttituirPrimeroVacio" name="button">Susttituir Primer parrafo Vacio</button>
+
+
+  </body>
+</html>

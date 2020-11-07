@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>JAX & XML</title>
+    <style media="screen">
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="texto">
+        <h1>Collecion de CD's</h1>
+        <button type="button" id="cargaCatalogo">Carga Catalogo</button>
+    </div>
+    <table id="demo">
+    </table>
+
+    <script type="text/javascript">
+      document.getElementById("cargaCatalogo").addEventListener("click",cargaCatalogo);
+      function cargaCatalogo(){
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function (){
+            if (this.readyState ==4 && this.status==200){
+            cargarXML(this);
+            }
+          };
+          xhr.open("GET", "catalogo.xml", true);
+          xhr.send();
+      }
+      function cargarXML(xml){
+        var docXML = xml.responseXML;
+        var tabla = "<tr><th>Artista</th><th>Titulo</th>";
+        var discos = docXML.getElementsByTagName("CD");
+        for (var i = 0; i<discos.length; i++ ){
+          tabla += "<tr><td>";
+          tabla +=discos[i].getElementsByTagName("ARTIST")[0].textContent;
+          tabla += "</td><td>";
+          tabla +=discos[i].getElementsByTagName("TITLE")[0].textContent;
+          tabla += "</td><td>";
+        }
+        document.getElementById("demo").innerHTML = tabla;
+      }
+    </script>
+
+  </body>
+</html>
